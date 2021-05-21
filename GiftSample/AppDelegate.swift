@@ -2,7 +2,7 @@
 //  AppDelegate.swift
 //  GiftSample
 //
-//  Created by Ceino on 20/05/21.
+
 //
 
 import UIKit
@@ -13,7 +13,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        // URLcache.
+        let allowedDiskSize = 100 * 1024 * 1024
+        URLCache.shared = URLCache(memoryCapacity: 0, diskCapacity: allowedDiskSize, diskPath: "gifCache")
         return true
     }
 

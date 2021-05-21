@@ -2,7 +2,7 @@
 //  GiftSampleUITests.swift
 //  GiftSampleUITests
 //
-//  Created by Ceino on 20/05/21.
+
 //
 
 import XCTest

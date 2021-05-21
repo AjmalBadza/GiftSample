@@ -2,7 +2,7 @@
 //  GiftSampleTests.swift
 //  GiftSampleTests
 //
-//  Created by Ceino on 20/05/21.
+
 //
 
 import XCTest
@@ -10,24 +10,49 @@ import XCTest
 
 class GiftSampleTests: XCTestCase {
 
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
+    func testModel() throws {
+       let vieModel = HomeViewModel()
+        let expectation = self.expectation(description: "testFeed")
+        
+        vieModel.loadHome { (string) in
+            XCTAssertEqual("Success", string)
+            expectation.fulfill()
         }
+        
+        waitForExpectations(timeout: 6, handler: nil)
     }
-
+    func testFeed() throws {
+       let api = ServerApi()
+        let expectation = self.expectation(description: "testFeed")
+        api.getHomeFeeds { (result) in
+            switch result {
+                case .failure(let error):
+                    XCTFail("Expected to be a success but got a failure with \(error)")
+                case .success(let value):
+                    XCTAssertNotNil(value)
+                }
+            expectation.fulfill()
+        }
+        
+        
+        waitForExpectations(timeout: 6, handler: nil)
+    }
+    func testBrands() throws {
+       let api = ServerApi()
+        let expectation = self.expectation(description: "testBrands")
+        api.getBrands(categoryId: 32,Page: 2) { (result) in
+            switch result {
+                case .failure(let error):
+                    XCTFail("Expected to be a success but got a failure with \(error)")
+                case .success(let value):
+                    XCTAssertNotNil(value)
+                }
+            expectation.fulfill()
+        }
+        
+        
+        waitForExpectations(timeout: 6, handler: nil)
+    }
+   
+    
 }

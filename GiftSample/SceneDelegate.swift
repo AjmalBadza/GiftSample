@@ -2,7 +2,6 @@
 //  SceneDelegate.swift
 //  GiftSample
 //
-//  Created by Ceino on 20/05/21.
 //
 
 import UIKit
